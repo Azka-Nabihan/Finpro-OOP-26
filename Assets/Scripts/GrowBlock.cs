@@ -109,7 +109,7 @@ public class GrowBlock : MonoBehaviour
             UpdateCropSprite();
         }
     }
-    void UpdateCropSprite()
+    public void UpdateCropSprite()
     {
         switch(currentStage)
         {

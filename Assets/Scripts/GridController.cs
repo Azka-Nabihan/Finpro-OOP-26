@@ -19,7 +19,9 @@ public class GridController : MonoBehaviour
     public List<BlockRow> blockRows = new List<BlockRow>();
 
     public LayerMask gridBlockers;
-      void Start()
+
+    // Start is called once before the first execution of Update after the MonoBehaviour is created
+    void Start()
     {
         GenerateGrid();
     }
@@ -42,7 +44,6 @@ public class GridController : MonoBehaviour
         gridSize = new Vector2Int(Mathf.RoundToInt(maxPoint.position.x - minPoint.position.x), 
             Mathf.RoundToInt(maxPoint.position.y - minPoint.position.y));
 
-
         for(int y = 0; y < gridSize.y; y++)
         {
             blockRows.Add(new BlockRow());
@@ -51,10 +52,12 @@ public class GridController : MonoBehaviour
             {
 
                 GrowBlock newBlock = Instantiate(baseGridBlock, startpoint + new Vector3(x , y, 0f), Quaternion.identity);
-               
+
                 newBlock.transform.SetParent(transform);
                 newBlock.theSR.sprite = null;
-                
+
+                newBlock.setGridPosition(x, y);
+
                 blockRows[y].blocks.Add(newBlock);
 
                 if(Physics2D.OverlapBox(newBlock.transform.position, new Vector2(.9f, .9f), 0f, gridBlockers))
@@ -63,9 +66,24 @@ public class GridController : MonoBehaviour
                     newBlock.preventUse = true;
                 }
 
+                if(GridInfo.instance.hasGrid == true)
+                {
+                    GridInfo.BlockInfo storedBlock = GridInfo.instance.theGrid[y].blocks[x];
+
+                    newBlock.currentStage = storedBlock.currentStage;
+                    newBlock.isWatered = storedBlock.isWatered;
+
+                    newBlock.SetSoilSprite();
+                    newBlock.UpdateCropSprite();
+                }
             }
         }
-        
+
+        if(GridInfo.instance.hasGrid == false)
+        {
+            GridInfo.instance.CreateGrid();
+        }
+
         baseGridBlock.gameObject.SetActive(false);
     }
 
@@ -92,6 +110,5 @@ public class GridController : MonoBehaviour
 [System.Serializable]
 public class BlockRow
 {
-    
     public List<GrowBlock> blocks = new List<GrowBlock>();
 }
