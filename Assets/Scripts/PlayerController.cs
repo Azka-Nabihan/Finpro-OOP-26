@@ -113,10 +113,15 @@ public class PlayerController : MonoBehaviour
             UIController.instance.SwitchTool((int)currentTool);
         }
 
+        if(GridController.instance != null)
+        {
+        
+
          if (actionInput.action.WasPressedThisFrame())
             {
                 UseTool();
             }
+
         anim.SetFloat("speed", theRB.linearVelocity.magnitude);
 
         toolIndicator.position = Camera.main.ScreenToWorldPoint(Mouse.current.position.ReadValue());
@@ -133,7 +138,12 @@ public class PlayerController : MonoBehaviour
             Mathf.FloorToInt(toolIndicator.position.y) + .5f,
             0f);
 
+         } else
+        {
+            toolIndicator.position = new Vector3(0f, 0f, -20f);
+        }
     }
+
 
     void UseTool()
     {
