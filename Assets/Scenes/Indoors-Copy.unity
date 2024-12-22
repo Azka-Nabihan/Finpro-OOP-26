@@ -1915,7 +1915,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 2464740055890918859, guid: f2789e931382a294e8272a8632013884, type: 3}
       propertyPath: transitionName
-      value: Main-Indoors
+      value: HenHouse
       objectReference: {fileID: 0}
     - target: {fileID: 3437212626417548603, guid: f2789e931382a294e8272a8632013884, type: 3}
       propertyPath: m_LocalPosition.x
