@@ -56,5 +56,5 @@
         "temp/": true,
         "Temp/": true
     },
-    "dotnet.defaultSolution": "Finpro-OOP-26.sln"
+    "dotnet.defaultSolution": "Farming Game.sln"
 }

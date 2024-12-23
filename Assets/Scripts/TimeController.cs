@@ -17,7 +17,6 @@ public class TimeController : MonoBehaviour
         {
             Destroy(gameObject);
         }
-                
     }
 
     public float currentTime;
@@ -43,6 +42,7 @@ public class TimeController : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
+
         if (timeActive == true)
         {
             currentTime += Time.deltaTime * timeSpeed;
@@ -60,23 +60,27 @@ public class TimeController : MonoBehaviour
         }
     }
 
+
     public void EndDay()
     {
         timeActive = false;
 
         currentDay++;
 
+        GridInfo.instance.GrowCrop();
 
-        StartDay();
+        PlayerPrefs.SetString("Transition", "WakeUp");
 
+        // StartDay();
+        SceneManager.LoadScene(dayEndScene);
     }
 
     public void StartDay()
     {
         timeActive = true;
-
+        
         currentTime = dayStart;
-
-
     }
 }
+
+

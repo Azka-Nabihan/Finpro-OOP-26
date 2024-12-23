@@ -17,7 +17,7 @@ public class BedController : MonoBehaviour
 
                 if(TimeController.instance != null)
                 {
-                    TimeController.instance.EndDay();
+                    TimeController.instance.EndDay();    
                 }
             }
         }
