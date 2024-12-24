@@ -44,9 +44,23 @@ public class PlayerController : MonoBehaviour
 
     }
 
-    // Update is called once per frame
+
     void Update()
     {
+        if (UIController.instance != null)
+        {
+            if (UIController.instance.theIC != null)
+            {
+                if (UIController.instance.theIC.gameObject.activeSelf == true)
+                {
+                    theRB.linearVelocity = Vector2.zero;
+                    return;
+                }
+            }
+        }
+
+
+        // Untuk menghentikan player ketika menggunakan tool
         if (toolWaitCounter > 0)
         {
             toolWaitCounter -= Time.deltaTime;
@@ -181,7 +195,7 @@ public class PlayerController : MonoBehaviour
                     if(CropController.instance.GetCropInfo(seedCropType).seedAmount > 0)
                     {
                         block.PlantCrop(seedCropType);
-                        CropController.instance.UseSeed(seedCropType);
+                        // CropController.instance.UseSeed(seedCropType);
                     }
 
                     break;
@@ -194,5 +208,10 @@ public class PlayerController : MonoBehaviour
 
             }
         }
+    }
+
+    public void SwitchSeed (CropController.CropType newSeed)
+    {
+        seedCropType = newSeed;
     }
 }
