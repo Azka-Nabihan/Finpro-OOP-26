@@ -8,14 +8,20 @@ public class InventoryController : MonoBehaviour
 
     public void OpenClose()
     {
-        if(gameObject.activeSelf == false)
+        // Selama Shop tidak dibuka, maka Inventory bisa dibuka
+        if (UIController.instance.theShop.gameObject.activeSelf == false)
         {
-            gameObject.SetActive(true);
-            UpdateDisplay();
-        } else
-        {
-            gameObject.SetActive(false);
+            if(gameObject.activeSelf == false)
+            {
+                gameObject.SetActive(true);
+                UpdateDisplay();
+            } else
+            {
+                gameObject.SetActive(false);
+            }
         }
+        
+        
     }
 
 

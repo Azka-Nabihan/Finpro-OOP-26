@@ -22,21 +22,29 @@ public class UIController : MonoBehaviour
     public GameObject[] toolbarActivatorIcons;
     public TMP_Text timeText;
     public InventoryController theIC;
+    public ShopController theShop;
     public Image seedImage;
+    public TMP_Text moneyText;
 
 
-    // Start is called once before the first execution of Update after the MonoBehaviour is created
     void Start()
     {
         // SwitchTool(1);
     }
 
-    // Update is called once per frame
+
     void Update()
     {
+        // Jika pencet I maka akan membuka inventory
         if(Keyboard.current.iKey.wasPressedThisFrame)   
         {
             theIC.OpenClose();
+        }
+
+        // Jika pencet B maka akan membuka shop
+        if(Keyboard.current.bKey.wasPressedThisFrame)
+        {
+            theShop.OpenClose();
         }
     }
 
@@ -75,5 +83,13 @@ public class UIController : MonoBehaviour
     {
         seedImage.sprite = CropController.instance.GetCropInfo(crop).seedType;
     }
+
+    public void UpdateMoneyText(float currentMoney)
+    {
+        moneyText.text = "$" + CurrencyController.instance.currentMoney;
+    }
+
+
+
 }
 
