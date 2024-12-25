@@ -40,7 +40,10 @@ public class PlayerController : MonoBehaviour
     // Start is called once before the first execution of Update after the MonoBehaviour is created
     void Start()
     {
+        // Untuk mengatur tool yang digunakan
         UIController.instance.SwitchTool((int)currentTool);
+        // Untuk mengatur seed yang digunakan
+        UIController.instance.SwitchSeed(seedCropType);
 
     }
 
@@ -52,6 +55,15 @@ public class PlayerController : MonoBehaviour
             if (UIController.instance.theIC != null)
             {
                 if (UIController.instance.theIC.gameObject.activeSelf == true)
+                {
+                    theRB.linearVelocity = Vector2.zero;
+                    return;
+                }
+            }
+
+            if(UIController.instance.theShop != null)
+            {
+                if(UIController.instance.theShop.gameObject.activeSelf == true)
                 {
                     theRB.linearVelocity = Vector2.zero;
                     return;

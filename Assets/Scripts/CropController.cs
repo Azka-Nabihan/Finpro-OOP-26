@@ -87,6 +87,18 @@ public class CropController : MonoBehaviour
             }
         }
     }
+
+    public void RemoveCrop(CropType cropTosell)
+    {
+        foreach (CropInfo info in cropList)
+        {
+            // Jual semua crop
+            if(info.cropType == cropTosell)
+            {
+                info.cropAmount = 0;
+            }
+        }
+    }
     
 }
 

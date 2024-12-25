@@ -41,12 +41,14 @@ public class UIController : MonoBehaviour
             theIC.OpenClose();
         }
 
+#if UNITY_EDITOR
         // Jika pencet B maka akan membuka shop
         if(Keyboard.current.bKey.wasPressedThisFrame)
         {
             theShop.OpenClose();
         }
     }
+#endif
 
     public void SwitchTool(int selected)
     {
@@ -78,7 +80,7 @@ public class UIController : MonoBehaviour
         }
     }
 
-
+    // Untuk mengganti tampilan seed
     public void SwitchSeed(CropController.CropType crop)
     {
         seedImage.sprite = CropController.instance.GetCropInfo(crop).seedType;
