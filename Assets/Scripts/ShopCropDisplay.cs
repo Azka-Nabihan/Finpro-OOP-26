@@ -35,6 +35,8 @@ public class ShopCropDisplay : MonoBehaviour
             CropController.instance.RemoveCrop(crop);
             // Update UI
             UpdateDisplay();
+
+            AudioManager.instance.PlaySFXPitchAdjusted(5);
         }
     
     }

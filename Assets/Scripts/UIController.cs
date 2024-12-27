@@ -1,6 +1,7 @@
 using TMPro;
 using UnityEngine;
 using UnityEngine.InputSystem;
+using UnityEngine.SceneManagement;
 using UnityEngine.UI;
 
 public class UIController : MonoBehaviour
@@ -25,6 +26,8 @@ public class UIController : MonoBehaviour
     public ShopController theShop;
     public Image seedImage;
     public TMP_Text moneyText;
+    public GameObject pauseScreen;
+    public string mainMenuScene;
 
 
     void Start()
@@ -47,8 +50,12 @@ public class UIController : MonoBehaviour
         {
             theShop.OpenClose();
         }
-    }
 #endif
+        if(Keyboard.current.escapeKey.wasPressedThisFrame || Keyboard.current.pKey.wasPressedThisFrame)
+        {
+            PauseUnpause();
+        }
+    }
 
     public void SwitchTool(int selected)
     {
@@ -84,6 +91,8 @@ public class UIController : MonoBehaviour
     public void SwitchSeed(CropController.CropType crop)
     {
         seedImage.sprite = CropController.instance.GetCropInfo(crop).seedType;
+
+        AudioManager.instance.PlaySFXPitchAdjusted(5);
     }
 
     public void UpdateMoneyText(float currentMoney)
@@ -91,6 +100,45 @@ public class UIController : MonoBehaviour
         moneyText.text = "$" + CurrencyController.instance.currentMoney;
     }
 
+    public void PauseUnpause()
+    {
+        if(pauseScreen.activeSelf == false)
+        {
+            pauseScreen.SetActive(true);
+
+            Time.timeScale = 0f;
+        }
+        else
+        {
+            pauseScreen.SetActive(false);
+
+            Time.timeScale = 1f;
+        }
+        AudioManager.instance.PlaySFXPitchAdjusted(5);
+    }
+
+    public void MainMenu()
+    {
+        Time.timeScale = 1f;
+
+        SceneManager.LoadScene(mainMenuScene);
+        Destroy(gameObject);
+        Destroy(PlayerController.instance.gameObject);
+        Destroy(GridInfo.instance.gameObject);
+        Destroy(TimeController.instance.gameObject);
+        Destroy(CropController.instance.gameObject);
+        Destroy(CurrencyController.instance.gameObject);
+
+        AudioManager.instance.PlaySFXPitchAdjusted(5);
+
+    }
+
+    public void QuitGame()
+    {
+        Application.Quit();
+
+        AudioManager.instance.PlaySFXPitchAdjusted(5);
+    }
 
 
 }

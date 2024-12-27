@@ -33,6 +33,8 @@ public class ShopSeedDisplay : MonoBehaviour
 
             // Update display
             updateDisplay();
+
+            AudioManager.instance.PlaySFXPitchAdjusted(5);
         }
     }
 }
